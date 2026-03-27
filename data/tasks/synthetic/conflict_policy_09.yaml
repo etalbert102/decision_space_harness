@@ -1,0 +1,26 @@
+task_id: policy_09
+title: Port emissions compliance timeline
+task_family: conflict_preservation
+source_type: synthetic
+query: What timeline should the port authority adopt for emissions compliance?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Climate office recommendation
+    content: {text: Faster electrification reduces local pollution exposure.}
+    provenance: {source_title: Synthetic climate recommendation, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Shipping association response
+    content: {text: Rapid compliance could disrupt freight throughput.}
+    provenance: {source_title: Synthetic shipping response, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: health, label: Health}, {frame_id: logistics, label: Logistics}]
+  conflicts: [{conflict_id: compliance_speed, label: Compliance speed disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: throughput_risk, label: Throughput risk disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: rapid_deadline, label: Rapid deadline}, {option_id: staged_deadline, label: Staged deadline}]
+  relevant_frame_ids: [health, logistics]
+  minority_frame_ids: [logistics]
+  expected_conflict_ids: [compliance_speed, throughput_risk]
+  candidate_option_ids: [rapid_deadline, staged_deadline]
+tags: [benchmark_v1, synthetic]

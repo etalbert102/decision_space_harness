@@ -1,0 +1,26 @@
+task_id: real_02
+title: City council parking reform memo set
+task_family: conflict_preservation
+source_type: real
+query: Should the city remove minimum parking requirements downtown?
+evidence_items:
+  - evidence_id: doc1
+    kind: memo
+    title: Planning department memo
+    content: {text: Removing minimums can lower housing costs and improve infill feasibility.}
+    provenance: {source_title: City planning memo, publication_date: 2023-11-02, citation: Public memo}
+  - evidence_id: doc2
+    kind: memo
+    title: Merchant association letter
+    content: {text: Reduced parking could hurt retail access and downtown foot traffic.}
+    provenance: {source_title: Merchant association letter, publication_date: 2023-11-06, citation: Public letter}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: housing, label: Housing}, {frame_id: retail_access, label: Retail access}]
+  conflicts: [{conflict_id: parking_minimums, label: Parking minimum disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: retail_impact, label: Retail impact disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: remove_minimums, label: Remove minimums}, {option_id: targeted_minimums, label: Targeted minimums}]
+  relevant_frame_ids: [housing, retail_access]
+  minority_frame_ids: [retail_access]
+  expected_conflict_ids: [parking_minimums, retail_impact]
+  candidate_option_ids: [remove_minimums, targeted_minimums]
+tags: [benchmark_v1, real_document]

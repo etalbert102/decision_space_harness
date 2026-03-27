@@ -364,6 +364,8 @@ Examples:
 
 The reporting layer should preserve enough data to estimate these units correctly.
 
+For this project, A2A-style or other explicit multi-agent communication studies should be treated as a future extension rather than a v1 baseline requirement. When added, they should introduce message-level telemetry and protocol definitions as an additional study mode, not silently overload the single-agent run model.
+
 ### 26.4 Default Aggregation Rules
 
 The harness should provide default aggregation rules by study type.
@@ -538,3 +540,6 @@ With this addendum, the harness should support three distinct readiness levels:
    the experiment satisfies protocol, validation, and inferential requirements
 
 The system should make these levels visible rather than treating successful execution as equivalent to scientific validity when the scientific protocol layer is enabled.
+
+Future extension note:
+A2A or other multi-agent communication protocols are compatible with this methodology, but they should enter as an explicit later extension with dedicated message-trace telemetry, protocol semantics, and interaction-level drift metrics. They are not required for the initial executable or reproducible harness baseline.

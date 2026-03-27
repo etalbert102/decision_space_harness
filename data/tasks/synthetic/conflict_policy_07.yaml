@@ -1,0 +1,26 @@
+task_id: policy_07
+title: Broadband subsidy design
+task_family: conflict_preservation
+source_type: synthetic
+query: How should the state structure broadband subsidies?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Infrastructure office proposal
+    content: {text: Build-out grants can close rural coverage gaps.}
+    provenance: {source_title: Synthetic infrastructure proposal, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Market competition memo
+    content: {text: Grants may entrench incumbents and crowd out challengers.}
+    provenance: {source_title: Synthetic competition memo, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: access, label: Access}, {frame_id: competition, label: Competition}]
+  conflicts: [{conflict_id: grant_targeting, label: Grant targeting disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: incumbent_advantage, label: Incumbent advantage disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: direct_grants, label: Direct grants}, {option_id: reverse_auction, label: Reverse auction}]
+  relevant_frame_ids: [access, competition]
+  minority_frame_ids: [competition]
+  expected_conflict_ids: [grant_targeting, incumbent_advantage]
+  candidate_option_ids: [direct_grants, reverse_auction]
+tags: [benchmark_v1, synthetic]

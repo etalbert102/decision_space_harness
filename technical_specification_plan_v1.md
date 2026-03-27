@@ -214,6 +214,7 @@ The system must:
 7. Preserve superseded attempts rather than overwriting them, while making the aggregate-selected attempt unambiguous for aggregation.
 8. Mark runs or experiments unassessable when trace integrity required for comparison or scoring is missing.
 9. Treat attempt-level telemetry as the canonical persisted source of truth and derive selected-run views from it deterministically.
+10. Support optional intra-attempt message telemetry so future multi-agent or A2A workflows can be reconstructed without changing the canonical attempt envelope.
 
 ### 7.6 Metrics Layer
 
@@ -616,6 +617,28 @@ Each completed attempt should emit an attempt record similar to:
 
 The telemetry schema must permit other artifact payloads without changing the top-level envelope.
 
+To keep the implementation flexible enough for later A2A or multi-agent experiments, v1 telemetry should also reserve an optional `message_records.jsonl` stream. Message records are canonical sub-attempt telemetry for agent-to-agent or agent-to-self communication traces; they do not replace attempt records, and they must be correlated back to one `attempt_id`.
+
+For v1, a message record should carry at minimum:
+
+1. `message_id`
+2. `attempt_id`
+3. `cell_id`
+4. `experiment_id`
+5. `task_id`
+6. `sender_agent`
+7. `receiver_agent`
+8. `message_type`
+9. `content`
+10. `parent_message_id`
+11. `referenced_evidence_ids`
+12. `referenced_option_ids`
+13. `referenced_conflict_ids`
+14. `correlation_id`
+15. `sequence_index`
+
+These records are intended to support later study protocols and metrics for coordination drift, disagreement loss across hops, or handoff distortion without forcing the runner to change its top-level attempt semantics.
+
 For v1, persisted attempt records should be immutable once written. Derived views such as selected-run views, failure summaries, and metric subjects should be reproducible from canonical attempt telemetry plus explicit derivation rules.
 
 For v1 serialization, canonical attempt records should carry the four state axes explicitly as:
@@ -925,6 +948,7 @@ Responsibilities:
 2. Call the model provider to execute generation.
 3. Parse outputs into a common artifact envelope with schema-specific payloads.
 4. Hand off raw artifacts to a registered normalizer when the agent does not emit a compatible normalized artifact directly.
+5. Optionally emit a message trace describing intra-agent or inter-agent communication events that occurred inside the attempt.
 
 Interfaces:
 
@@ -948,6 +972,9 @@ Minimum `AgentResult` contract for v1:
 4. cited evidence identifiers when available
 5. enough structured fields to support registered normalization
 6. model provenance echoed from `ModelResponse`
+7. optional message trace records suitable for persistence into `message_records.jsonl`
+
+For future A2A compatibility, the runner should treat `AgentResult.message_trace` as optional canonical sub-attempt telemetry. Single-agent pipelines may emit zero or one self-addressed message record in v1, while later multi-agent pipelines may emit richer handoff traces without changing the top-level attempt or selected-run schemas.
 
 Planned agent implementations:
 
@@ -1074,16 +1101,21 @@ Responsibilities:
 2. Persist logs, raw outputs, and derived summaries.
 3. Preserve compatibility between envelope fields and extensible payloads.
 4. Preserve boundary-level step records needed to reconstruct judgment structure.
+5. Persist optional message records correlated to attempts when agents emit them.
 
 Interfaces:
 
 1. `write_attempt_record(record, path)`
 2. `write_selected_run_view(record, path)`
 3. `write_step_record(record, path)`
-4. `load_attempt_records(path) -> list[AttemptRecord]`
-5. `load_selected_run_views(path) -> list[SelectedRunView]`
+4. `write_message_record(record, path)`
+5. `load_attempt_records(path) -> list[AttemptRecord]`
+6. `load_selected_run_views(path) -> list[SelectedRunView]`
+7. `load_message_records(path) -> list[MessageRecord]`
 
 Selected-run views should be treated as derived caches or convenience views. They may be loaded directly when a metric's projection contract explicitly selects `selected_runs`, but they must remain regenerable from canonical attempt telemetry and the deterministic selection policy.
+ 
+Message records should be treated as optional canonical sub-attempt telemetry. They are never a substitute for attempt records, but protocols and metrics may use them later to materialize communication- or coordination-level subjects.
 
 ### 12.10 `experiments`
 
@@ -1354,6 +1386,7 @@ Each experiment should generate:
 7. conditionally required `repro_bundle/` containing experiment config, resolved `study_protocol` identifier, `protocol_artifact` when present or required, registry snapshot, environment manifest or equivalent metadata, task and annotation versions, and the canonical outputs needed to reproduce reported results.
 8. `obligations.jsonl` containing assessability failures, compatibility issues, and review debt items.
 9. optional `steps.jsonl` containing boundary step records when step-level tracing is enabled.
+10. optional `message_records.jsonl` containing canonical sub-attempt communication traces when agents emit message telemetry
 
 For v1 artifact semantics:
 
@@ -1365,6 +1398,7 @@ For v1 artifact semantics:
 6. each selected-run view should carry the selected attempt's full stable envelope and normalized artifacts in addition to `selected_attempt_id`, `selection_role`, and `eligible_for_metric_scoring`
 7. `repro_bundle/` may be omitted only for workflows whose validated intent is exploratory, benchmark-or-demo use, and `readiness_target=executable`
 8. when `repro_bundle/` is required, it should include or manifest-link the exact `attempts.jsonl` and `runs.jsonl` artifacts referenced by metrics and summaries
+9. when present, `message_records.jsonl` must be correlated to canonical attempts by `attempt_id` and must not redefine attempt success or selection semantics
 
 For v1, each metric result record should include at minimum:
 

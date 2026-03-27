@@ -1,0 +1,26 @@
+task_id: policy_11
+title: Renewable siting permit standard
+task_family: conflict_preservation
+source_type: synthetic
+query: What permitting rule should the state use for renewable energy siting?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Clean energy coalition brief
+    content: {text: Faster permitting is necessary to hit climate targets.}
+    provenance: {source_title: Synthetic clean energy brief, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Habitat conservation memo
+    content: {text: Accelerated permitting risks underweighting habitat impacts.}
+    provenance: {source_title: Synthetic habitat memo, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: decarbonization, label: Decarbonization}, {frame_id: habitat, label: Habitat}]
+  conflicts: [{conflict_id: permit_speed, label: Permit speed disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: site_screening, label: Site screening disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: accelerated_permits, label: Accelerated permits}, {option_id: layered_review, label: Layered review}]
+  relevant_frame_ids: [decarbonization, habitat]
+  minority_frame_ids: [habitat]
+  expected_conflict_ids: [permit_speed, site_screening]
+  candidate_option_ids: [accelerated_permits, layered_review]
+tags: [benchmark_v1, synthetic]

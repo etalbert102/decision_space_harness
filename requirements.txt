@@ -1,0 +1,4 @@
+PyYAML>=6.0
+pydantic>=2.12.5
+orjson>=3.11.7
+pytest>=9.0.2

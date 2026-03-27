@@ -1,0 +1,26 @@
+task_id: real_07
+title: Coastal adaptation retreat zoning
+task_family: conflict_preservation
+source_type: real
+query: What retreat zoning policy should the coastal county adopt?
+evidence_items:
+  - evidence_id: doc1
+    kind: plan
+    title: Coastal resilience plan excerpt
+    content: {text: Managed retreat reduces long-run loss exposure in high-risk zones.}
+    provenance: {source_title: Coastal resilience plan, publication_date: 2024-04-11, citation: Public plan}
+  - evidence_id: doc2
+    kind: testimony
+    title: Homeowner coalition testimony
+    content: {text: Retreat zoning can destroy household wealth without fair transition support.}
+    provenance: {source_title: Homeowner coalition testimony, publication_date: 2024-04-16, citation: Public testimony}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: risk_reduction, label: Risk reduction}, {frame_id: property_stability, label: Property stability}]
+  conflicts: [{conflict_id: retreat_scope, label: Retreat scope disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: compensation_support, label: Compensation support disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: managed_retreat, label: Managed retreat}, {option_id: conditional_retreat, label: Conditional retreat}]
+  relevant_frame_ids: [risk_reduction, property_stability]
+  minority_frame_ids: [property_stability]
+  expected_conflict_ids: [retreat_scope, compensation_support]
+  candidate_option_ids: [managed_retreat, conditional_retreat]
+tags: [benchmark_v1, real_document]

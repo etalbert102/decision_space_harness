@@ -1,0 +1,26 @@
+task_id: policy_08
+title: School discipline reform
+task_family: conflict_preservation
+source_type: synthetic
+query: What disciplinary policy should the district adopt?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Student support report
+    content: {text: Restorative discipline can reduce exclusionary punishments.}
+    provenance: {source_title: Synthetic student support report, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Principal advisory memo
+    content: {text: Staff need clear consequences for repeat disruptions.}
+    provenance: {source_title: Synthetic principal memo, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: inclusion, label: Inclusion}, {frame_id: classroom_order, label: Classroom order}]
+  conflicts: [{conflict_id: discipline_threshold, label: Discipline threshold disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: repeat_offenses, label: Repeat offense disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: restorative_first, label: Restorative first}, {option_id: tiered_sanctions, label: Tiered sanctions}]
+  relevant_frame_ids: [inclusion, classroom_order]
+  minority_frame_ids: [classroom_order]
+  expected_conflict_ids: [discipline_threshold, repeat_offenses]
+  candidate_option_ids: [restorative_first, tiered_sanctions]
+tags: [benchmark_v1, synthetic]

@@ -1,0 +1,26 @@
+task_id: policy_03
+title: Water allocation drought response
+task_family: conflict_preservation
+source_type: synthetic
+query: What water allocation policy should the state use during drought?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Agricultural coalition statement
+    content: {text: Farms need predictable baseline allocations.}
+    provenance: {source_title: Synthetic agriculture statement, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Urban conservation analysis
+    content: {text: Cities can absorb cuts with conservation investment.}
+    provenance: {source_title: Synthetic urban analysis, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: agricultural, label: Agricultural}, {frame_id: municipal, label: Municipal}]
+  conflicts: [{conflict_id: baseline_allocation, label: Baseline allocation disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: demand_flexibility, label: Demand flexibility disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: proportional_cuts, label: Proportional cuts}, {option_id: urban_first_cuts, label: Urban-first cuts}]
+  relevant_frame_ids: [agricultural, municipal]
+  minority_frame_ids: [municipal]
+  expected_conflict_ids: [baseline_allocation, demand_flexibility]
+  candidate_option_ids: [proportional_cuts, urban_first_cuts]
+tags: [benchmark_v1, synthetic]

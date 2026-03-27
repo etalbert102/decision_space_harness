@@ -1,0 +1,21 @@
+experiment_id: conflict_real_docs_v1
+description: Provisional real-document task suite for phase 1B.
+task_set: real_conflict_tasks_v1
+analysis_label: exploratory
+target_use: benchmark
+readiness_target: executable
+agents:
+  - baseline_direct
+prompt_variants:
+  - default
+evidence_providers:
+  - top2
+models:
+  - local_model
+metrics:
+  - conflict_retention
+study_protocol: benchmark_single_run/v1
+protocol_artifact: null
+seeds:
+  - 11
+output_dir: outputs/experiments/conflict_real_docs_v1

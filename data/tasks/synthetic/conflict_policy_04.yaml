@@ -1,0 +1,26 @@
+task_id: policy_04
+title: Hospital staffing mandate tradeoff
+task_family: conflict_preservation
+source_type: synthetic
+query: Should the state impose a hospital staffing mandate?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Nursing association brief
+    content: {text: Mandatory ratios improve patient safety.}
+    provenance: {source_title: Synthetic nursing brief, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Rural hospital coalition memo
+    content: {text: Ratios may force rural ward closures.}
+    provenance: {source_title: Synthetic rural memo, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: safety, label: Safety}, {frame_id: access, label: Access}]
+  conflicts: [{conflict_id: staffing_ratio, label: Staffing ratio disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: rural_capacity, label: Rural capacity disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: mandate_now, label: Mandate now}, {option_id: phased_mandate, label: Phased mandate}]
+  relevant_frame_ids: [safety, access]
+  minority_frame_ids: [access]
+  expected_conflict_ids: [staffing_ratio, rural_capacity]
+  candidate_option_ids: [mandate_now, phased_mandate]
+tags: [benchmark_v1, synthetic]

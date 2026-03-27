@@ -1,0 +1,26 @@
+task_id: policy_02
+title: Grid reliability investment tradeoff
+task_family: conflict_preservation
+source_type: synthetic
+query: How should the regulator prioritize grid reliability upgrades?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Utility memo supporting rapid upgrades
+    content: {text: Rapid upgrades reduce outage risk quickly.}
+    provenance: {source_title: Synthetic utility memo, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Consumer brief warning about rate shock
+    content: {text: Aggressive upgrades may raise rates sharply.}
+    provenance: {source_title: Synthetic consumer brief, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: reliability, label: Reliability}, {frame_id: affordability, label: Affordability}]
+  conflicts: [{conflict_id: rate_shock, label: Rate shock disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: outage_timeline, label: Outage timeline disagreement, evidence_ids: [doc1]}]
+  options: [{option_id: accelerated_plan, label: Accelerated plan}, {option_id: phased_plan, label: Phased plan}]
+  relevant_frame_ids: [reliability, affordability]
+  minority_frame_ids: [affordability]
+  expected_conflict_ids: [rate_shock, outage_timeline]
+  candidate_option_ids: [accelerated_plan, phased_plan]
+tags: [benchmark_v1, synthetic]

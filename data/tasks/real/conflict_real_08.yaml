@@ -1,0 +1,26 @@
+task_id: real_08
+title: Regional air quality warehouse siting rule
+task_family: conflict_preservation
+source_type: real
+query: What warehouse siting rule should the air district adopt?
+evidence_items:
+  - evidence_id: doc1
+    kind: analysis
+    title: Air district staff analysis
+    content: {text: Stronger siting limits reduce concentrated pollution exposure near homes and schools.}
+    provenance: {source_title: Air district staff analysis, publication_date: 2023-12-07, citation: Public analysis}
+  - evidence_id: doc2
+    kind: comment
+    title: Logistics employer coalition comment
+    content: {text: Broad siting restrictions may constrain industrial land and employment growth.}
+    provenance: {source_title: Logistics employer comment, publication_date: 2023-12-12, citation: Public comment}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: health, label: Health}, {frame_id: industrial_capacity, label: Industrial capacity}]
+  conflicts: [{conflict_id: siting_limits, label: Siting limit disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: jobs_tradeoff, label: Jobs tradeoff disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: strict_buffers, label: Strict buffers}, {option_id: performance_standard, label: Performance standard}]
+  relevant_frame_ids: [health, industrial_capacity]
+  minority_frame_ids: [industrial_capacity]
+  expected_conflict_ids: [siting_limits, jobs_tradeoff]
+  candidate_option_ids: [strict_buffers, performance_standard]
+tags: [benchmark_v1, real_document]

@@ -1,0 +1,48 @@
+task_id: policy_01
+title: Industrial emissions regulation tradeoff
+task_family: conflict_preservation
+source_type: synthetic
+query: What policy approach should a regulator take?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Economic brief supporting policy_x
+    content:
+      text: Policy X minimizes short-term disruption.
+    provenance:
+      source_title: Synthetic economic brief
+      publication_date: null
+      citation: Synthetic source
+  - evidence_id: doc2
+    kind: document
+    title: Legal brief warning about weak enforcement
+    content:
+      text: A weak option may fail legal scrutiny.
+    provenance:
+      source_title: Synthetic legal brief
+      publication_date: null
+      citation: Synthetic source
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames:
+    - frame_id: economic
+      label: Economic
+    - frame_id: legal
+      label: Legal
+  conflicts:
+    - conflict_id: cost_burden
+      label: Cost burden disagreement
+      evidence_ids: [doc1, doc2]
+    - conflict_id: enforcement_risk
+      label: Enforcement risk disagreement
+      evidence_ids: [doc2]
+  options:
+    - option_id: policy_x
+      label: Policy X
+    - option_id: policy_y
+      label: Policy Y
+  relevant_frame_ids: [economic, legal]
+  minority_frame_ids: [legal]
+  expected_conflict_ids: [cost_burden, enforcement_risk]
+  candidate_option_ids: [policy_x, policy_y]
+tags: [benchmark_v1, synthetic]

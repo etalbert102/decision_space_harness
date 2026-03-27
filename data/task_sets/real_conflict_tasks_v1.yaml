@@ -1,0 +1,9 @@
+task_paths:
+  - ../tasks/real/conflict_real_01.yaml
+  - ../tasks/real/conflict_real_02.yaml
+  - ../tasks/real/conflict_real_03.yaml
+  - ../tasks/real/conflict_real_04.yaml
+  - ../tasks/real/conflict_real_05.yaml
+  - ../tasks/real/conflict_real_06.yaml
+  - ../tasks/real/conflict_real_07.yaml
+  - ../tasks/real/conflict_real_08.yaml

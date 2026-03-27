@@ -1,0 +1,26 @@
+task_id: real_04
+title: County behavioral health jail diversion package
+task_family: conflict_preservation
+source_type: real
+query: How should the county structure jail diversion for mental health crises?
+evidence_items:
+  - evidence_id: doc1
+    kind: report
+    title: Behavioral health department recommendation
+    content: {text: Dedicated crisis teams can reduce unnecessary detention.}
+    provenance: {source_title: County behavioral health report, publication_date: 2023-09-01, citation: Public report}
+  - evidence_id: doc2
+    kind: memo
+    title: Sheriff office operational memo
+    content: {text: Diversion programs need clear eligibility boundaries and secure transport support.}
+    provenance: {source_title: Sheriff operational memo, publication_date: 2023-09-08, citation: Public memo}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: treatment_access, label: Treatment access}, {frame_id: operational_control, label: Operational control}]
+  conflicts: [{conflict_id: diversion_scope, label: Diversion scope disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: transport_capacity, label: Transport capacity disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: broad_diversion, label: Broad diversion}, {option_id: bounded_diversion, label: Bounded diversion}]
+  relevant_frame_ids: [treatment_access, operational_control]
+  minority_frame_ids: [operational_control]
+  expected_conflict_ids: [diversion_scope, transport_capacity]
+  candidate_option_ids: [broad_diversion, bounded_diversion]
+tags: [benchmark_v1, real_document]

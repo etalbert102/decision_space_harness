@@ -1,0 +1,26 @@
+task_id: policy_10
+title: Opioid settlement fund allocation
+task_family: conflict_preservation
+source_type: synthetic
+query: How should the county allocate opioid settlement funds?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Public health department proposal
+    content: {text: Treatment expansion should be the top priority.}
+    provenance: {source_title: Synthetic public health proposal, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Recovery community statement
+    content: {text: Housing and peer support are underfunded relative to treatment.}
+    provenance: {source_title: Synthetic recovery statement, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: treatment, label: Treatment}, {frame_id: recovery_support, label: Recovery support}]
+  conflicts: [{conflict_id: spending_priority, label: Spending priority disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: housing_support, label: Housing support disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: treatment_majority, label: Treatment majority}, {option_id: balanced_allocation, label: Balanced allocation}]
+  relevant_frame_ids: [treatment, recovery_support]
+  minority_frame_ids: [recovery_support]
+  expected_conflict_ids: [spending_priority, housing_support]
+  candidate_option_ids: [treatment_majority, balanced_allocation]
+tags: [benchmark_v1, synthetic]

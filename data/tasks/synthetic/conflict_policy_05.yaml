@@ -1,0 +1,26 @@
+task_id: policy_05
+title: Public transit fare restructuring
+task_family: conflict_preservation
+source_type: synthetic
+query: How should the city restructure transit fares?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Transit operations memo
+    content: {text: Peak fares can stabilize finances.}
+    provenance: {source_title: Synthetic transit memo, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Equity coalition statement
+    content: {text: Peak fares may burden low-income commuters.}
+    provenance: {source_title: Synthetic equity statement, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: fiscal, label: Fiscal}, {frame_id: equity, label: Equity}]
+  conflicts: [{conflict_id: peak_pricing, label: Peak pricing disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: ridership_drop, label: Ridership drop disagreement, evidence_ids: [doc1]}]
+  options: [{option_id: peak_fares, label: Peak fares}, {option_id: flat_fares, label: Flat fares}]
+  relevant_frame_ids: [fiscal, equity]
+  minority_frame_ids: [equity]
+  expected_conflict_ids: [peak_pricing, ridership_drop]
+  candidate_option_ids: [peak_fares, flat_fares]
+tags: [benchmark_v1, synthetic]

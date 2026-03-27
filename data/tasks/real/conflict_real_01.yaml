@@ -1,0 +1,26 @@
+task_id: real_01
+title: State utility commission wildfire hearing
+task_family: conflict_preservation
+source_type: real
+query: What wildfire cost recovery approach should the commission adopt?
+evidence_items:
+  - evidence_id: doc1
+    kind: excerpt
+    title: Hearing excerpt from utility witness
+    content: {text: Immediate recovery supports system hardening and investor stability.}
+    provenance: {source_title: Utility commission hearing excerpt, publication_date: 2024-05-14, citation: Public hearing excerpt}
+  - evidence_id: doc2
+    kind: excerpt
+    title: Consumer advocate testimony
+    content: {text: Rapid recovery shifts too much risk to ratepayers without accountability.}
+    provenance: {source_title: Consumer advocate testimony, publication_date: 2024-05-14, citation: Public hearing excerpt}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: resilience, label: Resilience}, {frame_id: accountability, label: Accountability}]
+  conflicts: [{conflict_id: cost_recovery, label: Cost recovery disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: shareholder_risk, label: Shareholder risk disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: immediate_recovery, label: Immediate recovery}, {option_id: conditional_recovery, label: Conditional recovery}]
+  relevant_frame_ids: [resilience, accountability]
+  minority_frame_ids: [accountability]
+  expected_conflict_ids: [cost_recovery, shareholder_risk]
+  candidate_option_ids: [immediate_recovery, conditional_recovery]
+tags: [benchmark_v1, real_document]

@@ -1,0 +1,26 @@
+task_id: real_05
+title: Metropolitan floodplain buyout program
+task_family: conflict_preservation
+source_type: real
+query: How should the metro region structure floodplain buyouts?
+evidence_items:
+  - evidence_id: doc1
+    kind: plan
+    title: Regional resilience plan excerpt
+    content: {text: Targeted buyouts can reduce repeated public loss exposure.}
+    provenance: {source_title: Regional resilience plan, publication_date: 2024-01-22, citation: Public plan}
+  - evidence_id: doc2
+    kind: testimony
+    title: Neighborhood coalition testimony
+    content: {text: Buyouts can fracture communities when relocation support is weak.}
+    provenance: {source_title: Neighborhood coalition testimony, publication_date: 2024-01-29, citation: Public testimony}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: risk_reduction, label: Risk reduction}, {frame_id: community_stability, label: Community stability}]
+  conflicts: [{conflict_id: buyout_scope, label: Buyout scope disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: relocation_support, label: Relocation support disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: targeted_buyouts, label: Targeted buyouts}, {option_id: voluntary_buyouts_plus_support, label: Voluntary buyouts plus support}]
+  relevant_frame_ids: [risk_reduction, community_stability]
+  minority_frame_ids: [community_stability]
+  expected_conflict_ids: [buyout_scope, relocation_support]
+  candidate_option_ids: [targeted_buyouts, voluntary_buyouts_plus_support]
+tags: [benchmark_v1, real_document]

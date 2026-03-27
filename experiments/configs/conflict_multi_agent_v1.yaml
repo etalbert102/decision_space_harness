@@ -1,0 +1,26 @@
+experiment_id: conflict_multi_agent_v1
+description: Phase 2 multi-agent and prompt-variant sweep.
+task_set: conflict_task_smoke_v1
+analysis_label: exploratory
+target_use: benchmark
+readiness_target: executable
+agents:
+  - baseline_direct
+  - retrieve_then_synthesize
+  - option_generation
+  - structured_conflict_preserving
+prompt_variants:
+  - default
+  - disagreement_preserving
+evidence_providers:
+  - top1
+  - top2
+models:
+  - local_model
+metrics:
+  - conflict_retention
+study_protocol: benchmark_single_run/v1
+protocol_artifact: null
+seeds:
+  - 11
+output_dir: outputs/experiments/conflict_multi_agent_v1

@@ -1,0 +1,26 @@
+task_id: policy_12
+title: EV charger curb access policy
+task_family: conflict_preservation
+source_type: synthetic
+query: How should the city allocate curb access for EV chargers?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Transportation electrification plan
+    content: {text: Dedicated curb chargers accelerate EV adoption.}
+    provenance: {source_title: Synthetic electrification plan, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Small business corridor memo
+    content: {text: Dedicated charger spaces can reduce customer turnover for storefronts.}
+    provenance: {source_title: Synthetic corridor memo, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: adoption, label: Adoption}, {frame_id: commerce, label: Commerce}]
+  conflicts: [{conflict_id: curb_allocation, label: Curb allocation disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: turnover_loss, label: Turnover loss disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: dedicated_chargers, label: Dedicated chargers}, {option_id: mixed_use_curb, label: Mixed-use curb}]
+  relevant_frame_ids: [adoption, commerce]
+  minority_frame_ids: [commerce]
+  expected_conflict_ids: [curb_allocation, turnover_loss]
+  candidate_option_ids: [dedicated_chargers, mixed_use_curb]
+tags: [benchmark_v1, synthetic]

@@ -1,0 +1,26 @@
+task_id: policy_06
+title: Wildfire mitigation zoning rule
+task_family: conflict_preservation
+source_type: synthetic
+query: What wildfire zoning restrictions should the county adopt?
+evidence_items:
+  - evidence_id: doc1
+    kind: document
+    title: Fire authority recommendation
+    content: {text: Strict buffer zones reduce catastrophic spread risk.}
+    provenance: {source_title: Synthetic fire recommendation, publication_date: null, citation: Synthetic source}
+  - evidence_id: doc2
+    kind: document
+    title: Housing supply brief
+    content: {text: Strict buffers will further constrain housing supply.}
+    provenance: {source_title: Synthetic housing brief, publication_date: null, citation: Synthetic source}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: resilience, label: Resilience}, {frame_id: housing, label: Housing}]
+  conflicts: [{conflict_id: buffer_zone, label: Buffer zone disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: supply_constraint, label: Supply constraint disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: strict_buffers, label: Strict buffers}, {option_id: targeted_buffers, label: Targeted buffers}]
+  relevant_frame_ids: [resilience, housing]
+  minority_frame_ids: [housing]
+  expected_conflict_ids: [buffer_zone, supply_constraint]
+  candidate_option_ids: [strict_buffers, targeted_buffers]
+tags: [benchmark_v1, synthetic]

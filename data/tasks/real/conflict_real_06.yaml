@@ -1,0 +1,26 @@
+task_id: real_06
+title: State freight corridor tolling package
+task_family: conflict_preservation
+source_type: real
+query: How should the state structure freight corridor tolling?
+evidence_items:
+  - evidence_id: doc1
+    kind: report
+    title: Transportation finance report
+    content: {text: Corridor tolling can fund deferred freight infrastructure improvements.}
+    provenance: {source_title: Transportation finance report, publication_date: 2024-03-14, citation: Public report}
+  - evidence_id: doc2
+    kind: comment
+    title: Trucking association comment
+    content: {text: New tolls could raise logistics costs and shift traffic onto local roads.}
+    provenance: {source_title: Trucking association comment, publication_date: 2024-03-19, citation: Public comment}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: infrastructure, label: Infrastructure}, {frame_id: logistics_cost, label: Logistics cost}]
+  conflicts: [{conflict_id: toll_revenue, label: Toll revenue disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: diversion_risk, label: Diversion risk disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: corridor_tolling, label: Corridor tolling}, {option_id: targeted_user_fees, label: Targeted user fees}]
+  relevant_frame_ids: [infrastructure, logistics_cost]
+  minority_frame_ids: [logistics_cost]
+  expected_conflict_ids: [toll_revenue, diversion_risk]
+  candidate_option_ids: [corridor_tolling, targeted_user_fees]
+tags: [benchmark_v1, real_document]

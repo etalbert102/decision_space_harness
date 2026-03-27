@@ -1,0 +1,13 @@
+task_paths:
+  - ../tasks/synthetic/conflict_policy_01.yaml
+  - ../tasks/synthetic/conflict_policy_02.yaml
+  - ../tasks/synthetic/conflict_policy_03.yaml
+  - ../tasks/synthetic/conflict_policy_04.yaml
+  - ../tasks/synthetic/conflict_policy_05.yaml
+  - ../tasks/synthetic/conflict_policy_06.yaml
+  - ../tasks/synthetic/conflict_policy_07.yaml
+  - ../tasks/synthetic/conflict_policy_08.yaml
+  - ../tasks/synthetic/conflict_policy_09.yaml
+  - ../tasks/synthetic/conflict_policy_10.yaml
+  - ../tasks/synthetic/conflict_policy_11.yaml
+  - ../tasks/synthetic/conflict_policy_12.yaml

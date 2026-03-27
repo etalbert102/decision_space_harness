@@ -1,0 +1,26 @@
+task_id: real_03
+title: State education board literacy guidance
+task_family: conflict_preservation
+source_type: real
+query: What literacy curriculum rule should the board adopt?
+evidence_items:
+  - evidence_id: doc1
+    kind: report
+    title: Reading intervention report
+    content: {text: Strong phonics requirements improve early decoding outcomes.}
+    provenance: {source_title: State reading report, publication_date: 2024-02-10, citation: Public report}
+  - evidence_id: doc2
+    kind: comment
+    title: Teacher coalition comment
+    content: {text: Rigid statewide rules may undercut local professional judgment and multilingual supports.}
+    provenance: {source_title: Teacher coalition comment, publication_date: 2024-02-18, citation: Public comment}
+annotations_schema: conflict_preservation/v1
+annotations:
+  frames: [{frame_id: evidence_based, label: Evidence-based instruction}, {frame_id: local_flexibility, label: Local flexibility}]
+  conflicts: [{conflict_id: phonics_mandate, label: Phonics mandate disagreement, evidence_ids: [doc1, doc2]}, {conflict_id: teacher_discretion, label: Teacher discretion disagreement, evidence_ids: [doc2]}]
+  options: [{option_id: statewide_rule, label: Statewide rule}, {option_id: local_framework, label: Local framework}]
+  relevant_frame_ids: [evidence_based, local_flexibility]
+  minority_frame_ids: [local_flexibility]
+  expected_conflict_ids: [phonics_mandate, teacher_discretion]
+  candidate_option_ids: [statewide_rule, local_framework]
+tags: [benchmark_v1, real_document]
